@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import type { Model } from 'mongoose';
 import type { CreateTaskDto } from './dto/create-task.dto';
 import type { UpdateTaskDto } from './dto/update-task.dto';
-import { Task } from 'src/schemas/task.schema';
+import { Task } from './entities/task.entity';
 
 @Injectable()
 export class TasksService {
