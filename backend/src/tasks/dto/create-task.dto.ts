@@ -1,4 +1,5 @@
 import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { UserDocument } from 'src/users/entities/user.entity';
 
 export class CreateTaskDto {
   @IsString()
@@ -12,4 +13,6 @@ export class CreateTaskDto {
   @IsBoolean()
   @IsOptional()
   done?: boolean;
+
+  user: string;
 }

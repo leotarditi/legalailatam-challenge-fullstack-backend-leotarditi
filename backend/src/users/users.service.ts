@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import type { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
-import type { Model } from 'mongoose';
+import { Model } from 'mongoose';
 import { User } from './entities/user.entity';
 
 @Injectable()
@@ -18,6 +18,12 @@ export class UsersService {
 
   findOneByEmail(email: string) {
     return this.userModel.findOne({ email });
+  }
+
+  findOneByEmailWithPassword(email: string) {
+    return this.userModel
+      .findOne({ email })
+      .select('_id name email password role');
   }
 
   findAll() {

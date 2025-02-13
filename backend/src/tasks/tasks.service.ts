@@ -1,9 +1,18 @@
-import { Injectable } from '@nestjs/common';
+/* eslint-disable @typescript-eslint/no-unsafe-enum-comparison */
+import {
+  BadRequestException,
+  HttpException,
+  HttpStatus,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import type { Model } from 'mongoose';
-import type { CreateTaskDto } from './dto/create-task.dto';
+import { CreateTaskDto } from './dto/create-task.dto';
 import type { UpdateTaskDto } from './dto/update-task.dto';
 import { Task } from './entities/task.entity';
+import { UserActiveInterface } from 'src/common/interfaces/user-active.interface';
+import { Role } from 'src/common/enums/rol.enum';
 
 @Injectable()
 export class TasksService {
@@ -14,19 +23,52 @@ export class TasksService {
     return createdTask.save();
   }
 
-  async findAll(): Promise<Task[]> {
-    return this.taskModel.find().exec();
+  async findAll(user: UserActiveInterface): Promise<Task[]> {
+    if (user.role === Role.ADMIN) {
+      return await this.taskModel.find().exec();
+    }
+    return await this.taskModel.find({ user: user.email }).exec();
   }
 
-  async findOne(id: string): Promise<Task | null> {
-    return this.taskModel.findById(id).exec();
+  async findOne(id: string, user: UserActiveInterface): Promise<Task | null> {
+    const task = await this.taskModel.findById(id).exec();
+
+    if (!task) {
+      throw new BadRequestException('Task not found');
+    }
+
+    this.validateOwnership(task, user);
+
+    return task;
   }
 
-  async delete(id: string): Promise<Task | null> {
-    return this.taskModel.findByIdAndDelete(id);
+  async update(
+    id: string,
+    updateTaskDto: UpdateTaskDto,
+    user: UserActiveInterface,
+  ): Promise<Task | null> {
+    await this.findOne(id, user);
+
+    return await this.taskModel
+      .findByIdAndUpdate(
+        id,
+        {
+          ...updateTaskDto,
+        },
+        { new: true }, // Esto devuelve el documento actualizado
+      )
+      .exec();
   }
 
-  async update(id: string, createTaskDto: UpdateTaskDto): Promise<Task | null> {
-    return this.taskModel.findByIdAndUpdate(id, createTaskDto, { new: true });
+  async delete(id: string, user: UserActiveInterface): Promise<Task | null> {
+    await this.findOne(id, user);
+
+    return await this.taskModel.findByIdAndDelete(id);
+  }
+
+  private validateOwnership(task: Task, user: UserActiveInterface) {
+    if (user.role !== Role.ADMIN && task.userEmail !== user.email) {
+      throw new UnauthorizedException();
+    }
   }
 }

@@ -4,11 +4,11 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
-import type { RegisterDto } from './dto/register.dto';
+import { RegisterDto } from './dto/register.dto';
 
 import { JwtService } from '@nestjs/jwt';
 import { hash, compare } from 'bcryptjs';
-import type { LoginDto } from './dto/login.dto';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
@@ -37,7 +37,7 @@ export class AuthService {
   }
 
   async login({ email, password }: LoginDto) {
-    const user = await this.usersService.findOneByEmail(email);
+    const user = await this.usersService.findOneByEmailWithPassword(email);
     if (!user) {
       throw new UnauthorizedException('email is wrong');
     }
@@ -56,7 +56,7 @@ export class AuthService {
     };
   }
 
-  async profile({ email, role }: { email: string; role: string }) {
+  async profile({ email }: { email: string }) {
     return await this.usersService.findOneByEmail(email);
   }
 }
