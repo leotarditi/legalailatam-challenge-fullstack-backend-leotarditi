@@ -1,95 +1,99 @@
-# Prueba Técnica: Desarrollo de una Aplicación de Gestión de Tareas (Fullstack)
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+</p>
 
-## Descripción del Proyecto
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-El objetivo es desarrollar una aplicación de **Gestión de Tareas** utilizando **React, TypeScript, Zustand** para el frontend y **NestJS con MongoDB** para el backend. La aplicación permitirá a los usuarios:
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-- Crear, editar, eliminar y marcar tareas como completadas.
-- Agrupar tareas por etiquetas (**tags**).
-- Implementar un filtro de búsqueda por título y etiquetas.
-- Gestionar el estado global en el frontend con **Zustand**.
-- Implementar un backend con **NestJS y MongoDB** para la persistencia de datos.
+## Description
 
----
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## 1. Frontend (React + TypeScript + Zustand)
+## Project setup
 
-### Tecnologías a Usar:
-- React con TypeScript
-- Zustand para la gestión del estado
-- React Query para manejo de llamadas API
-- TailwindCSS (opcional)
-- React Router para navegación
-
-### Estructura de Carpetas (Frontend)
-```
-frontend/
-│── src/
-│   ├── components/
-│   ├── hooks/
-│   ├── pages/
-│   ├── store/
-│── public/
-```
-
----
-
-## 2. Backend (NestJS + MongoDB)
-
-### Tecnologías a Usar:
-- NestJS con TypeScript
-- MongoDB con Mongoose
-- JWT para autenticación (Opcional)
-- Jest para pruebas unitarias
-
-### Estructura de Carpetas (Backend)
-```
-backend/
-│── src/
-│   ├── controllers/
-│   ├── services/
-│   ├── models/
+```bash
+$ pnpm install
 ```
 
----
+## Compile and run the project
 
-## 3. Conexión Frontend-Backend
-- El frontend consumirá los endpoints del backend mediante `fetch` o **React Query**.
-- El backend manejará la lógica de negocio y persistencia en **MongoDB**.
-- Se pueden agregar pruebas unitarias con **Jest** para validar funcionalidad.
+```bash
+# development
+$ pnpm run start
 
----
+# watch mode
+$ pnpm run start:dev
 
-## 4. Criterios de Evaluación
+# production mode
+$ pnpm run start:prod
+```
 
-### Frontend
-| Aspecto | Puntaje |
-|---------|---------|
-| Estructura del Código | 10 pts |
-| Uso de TypeScript | 10 pts |
-| Implementación de Zustand (Frontend) | 10 pts |
-| Manejo de Efectos Secundarios | 10 pts |
-| Optimización de Rendimiento | 5 pts |
+## Run tests
 
-### Backend
-| Aspecto | Puntaje |
-|---------|---------|
-| Backend con NestJS y MongoDB | 20 pts |
-| API RESTful con Buenas Prácticas | 15 pts |
-| Autenticación JWT (Opcional) | 10 pts |
-| Pruebas Unitarias en Backend con Jest | 10 pts |
+```bash
+# unit tests
+$ pnpm run test
 
----
+# e2e tests
+$ pnpm run test:e2e
 
-## 5. Formato de Entrega
-- Código fuente en **GitHub**, con backend y frontend en carpetas separadas.
-- **README.md** con instrucciones para correr backend y frontend.
-- **Opcional:** Docker para facilitar el despliegue.
+# test coverage
+$ pnpm run test:cov
+```
 
----
+## Deployment
 
-## 6. Puntos Adicionales
-- Habilitar actualización en tiempo real con **WebSockets** (+5 pts).
-- Agregar almacenamiento offline con **IndexedDB** (+5 pts).
-- Desplegar la aplicación en **Vercel, Heroku u otro servicio** (+5 pts).
-- Soporte para múltiples usuarios con autenticación **JWT y roles** (+10 pts).
+When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+
+If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+
+```bash
+$ pnpm install -g mau
+$ mau deploy
+```
+
+With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+
+## Resources
+
+Check out a few resources that may come in handy when working with NestJS:
+
+- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
+- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
+- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
+- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
+- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
+- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
+- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
+- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+
+## Support
+
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+
+## Stay in touch
+
+- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
+
+## License
+
+Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
